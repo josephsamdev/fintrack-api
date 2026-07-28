@@ -41,3 +41,26 @@ def get_stock_history(ticker: str, period: str = "1mo"):
         "period": period,
         "data": data
     }
+
+@app.get("/stock/{ticker}/sma")
+def get_sma(ticker: str, period: str = "3mo", window: int = 20):
+    stock = yf.Ticker(ticker)
+    history = stock.history(period=period)
+
+    history["SMA"] = history["Close"].rolling(window=window).mean().round(2)
+
+    data = []
+    for date, row in history.iterrows():
+        data.append({
+            "date": str(date.date()),
+            "close": round(row["Close"], 2),
+            "sma": None if str(row["SMA"]) == "nan" else row["SMA"]
+        })
+
+    return {
+        "ticker": ticker.upper(),
+        "period": period,
+        "window": window,
+        "data": data
+    }    
+
