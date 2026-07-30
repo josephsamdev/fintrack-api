@@ -35,6 +35,13 @@ uvicorn main:app --reload
 ```
 The API will be available at http://127.0.0.1:8000
 
+## Interactive API Docs
+
+FastAPI automatically generates interactive documentation for all endpoints. Once the API is running, visit:
+
+- http://127.0.0.1:8000/docs — Swagger UI (test endpoints directly in the browser)
+- http://127.0.0.1:8000/redoc — ReDoc (clean reference documentation)
+
 ## Endpoints 
 
 ### Get current stock price 
