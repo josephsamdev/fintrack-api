@@ -18,8 +18,8 @@ def get_stock_price(ticker: str):
         
         return {
             "ticker": ticker.upper(),
-            "current_price": info.last_price,
-            "market_cap": info.market_cap,
+            "current_price": round(info.last_price, 2),
+            "market_cap": round(info.market_cap),
             "currency": info.currency
         }
     except Exception as e:
