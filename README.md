@@ -1,6 +1,16 @@
 # fintrack-api
 A REST API for querying live and historical financial market data, built with Python and FastAPI.
 
+## Live Demo
+
+Base URL: https://fintrack-api-5i10.onrender.com
+
+Try it:
+- https://fintrack-api-5i10.onrender.com/stock/AAPL
+- https://fintrack-api-5i10.onrender.com/stock/AAPL/history
+- https://fintrack-api-5i10.onrender.com/stock/AAPL/sma
+- https://fintrack-api-5i10.onrender.com/docs
+
 ## Overview
 
 fintrack-api is a backend REST API that allows users to query real-time and historical stock market data. It exposes clean endpoints for retrieving stock prices, price history, and key financial metrics such as moving averages.
