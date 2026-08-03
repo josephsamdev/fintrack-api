@@ -1,12 +1,15 @@
 from fastapi import FastAPI
 import yfinance as yf
 
+#Initialising the FastAPI app
 app = FastAPI()
 
+#Root endpoint - this confirms that the API is running
 @app.get("/")
 def root():
     return {"message": "Welcome to fintrack-api"}
 
+# The endpoint to get the current stock price for a given ticker symbol
 @app.get("/stock/{ticker}")
 def get_stock_price(ticker: str):
     try:
