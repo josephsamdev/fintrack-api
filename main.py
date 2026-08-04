@@ -13,9 +13,12 @@ def root():
 @app.get("/stock/{ticker}")
 def get_stock_price(ticker: str):
     try:
+
+        # Fetching stock data from Yahoo Finance
         stock = yf.Ticker(ticker)
         info = stock.fast_info
-        
+
+        # If no price is returned, ticker is likely invalid
         if info.last_price is None:
             raise ValueError("Invalid ticker")
         
