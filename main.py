@@ -4,7 +4,7 @@ import yfinance as yf
 #Initialising the FastAPI app
 app = FastAPI()
 
-#Root endpoint - this confirms that the API is running
+# Root endpoint - this confirms that the API is running
 @app.get("/")
 def root():
     return {"message": "Welcome to fintrack-api"}
@@ -29,17 +29,20 @@ def get_stock_price(ticker: str):
             "market_cap": round(info.market_cap),
             "currency": info.currency
         }
-    # In case of any exceptions, returns the error message in the below
+    # In any error occurs, return a clean error message instead of crashing
     except Exception as e:
         return {"error": f"Could not retrieve data for ticker '{ticker.upper()}'. Please check the ticker symbol and try again."}
     
 
+# Endpoint to retrieve history daily price data for a given ticker and time period 
 @app.get("/stock/{ticker}/history")
 def get_stock_history(ticker: str, period: str = "1mo"):
     try:
+        # Fetch historical price data from Yahoo finance
         stock = yf.Ticker(ticker)
         history = stock.history(period=period)
-        
+
+        # If the dataframe is empty, it's likely the ticker is invalid
         if history.empty:
             return {"error": f"Could not retrieve history for ticker '{ticker.upper()}'. Please check the ticker symbol and try again."}
         
