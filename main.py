@@ -21,13 +21,15 @@ def get_stock_price(ticker: str):
         # If no price is returned, ticker is likely invalid
         if info.last_price is None:
             raise ValueError("Invalid ticker")
-        
+
+        # Return key price and market data, rounded for clean output
         return {
             "ticker": ticker.upper(),
             "current_price": round(info.last_price, 2),
             "market_cap": round(info.market_cap),
             "currency": info.currency
         }
+    # In case of any exceptions, returns the error message in the below
     except Exception as e:
         return {"error": f"Could not retrieve data for ticker '{ticker.upper()}'. Please check the ticker symbol and try again."}
     
