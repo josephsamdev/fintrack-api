@@ -29,7 +29,7 @@ def get_stock_price(ticker: str):
             "market_cap": round(info.market_cap),
             "currency": info.currency
         }
-    # In any error occurs, return a clean error message instead of crashing
+    # If any error occurs, return a clean error message instead of crashing
     except Exception as e:
         return {"error": f"Could not retrieve data for ticker '{ticker.upper()}'. Please check the ticker symbol and try again."}
     
@@ -45,7 +45,8 @@ def get_stock_history(ticker: str, period: str = "1mo"):
         # If the dataframe is empty, it's likely the ticker is invalid
         if history.empty:
             return {"error": f"Could not retrieve history for ticker '{ticker.upper()}'. Please check the ticker symbol and try again."}
-        
+
+        # Loop through each tading day, extract OHLVC data and append to list
         data = []
         for date, row in history.iterrows():
             data.append({
