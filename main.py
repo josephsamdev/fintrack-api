@@ -57,12 +57,14 @@ def get_stock_history(ticker: str, period: str = "1mo"):
                 "low": round(row["Low"], 2),
                 "volume": int(row["Volume"])
             })
-        
+        # Return ticker and time period and full price history data
         return {
             "ticker": ticker.upper(),
             "period": period,
             "data": data
         }
+
+    # In case any errors occur, return a clean message instead of crashing 
     except Exception as e:
         return {"error": f"Could not retrieve history for ticker '{ticker.upper()}'. Please check the ticker symbol and try again."}
 
